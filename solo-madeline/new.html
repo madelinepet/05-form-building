@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lab 5</title>
+    <link rel="stylesheet" href="vendor/styles/normalize.css">
+    <link rel="stylesheet" href="vendor/styles/icons.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/modules.css">
+    <!-- NOTE (stretch goal): To fully incorporate the highlighting library "hljs" we need to fill the empty link tag below to refer to a CSS file that will handle our text highlighting -->
+    <link>
+    <script id="article-template" type="text/x-handlebars-template">
+      <article class="clearfix" data-author="{{author}}" data-category="{{category}}">
+        <header>
+          <h1>{{title}}</h1>
+          <div class="byline">
+            By <address><a href="{{authorUrl}}">{{author}}</a></address>
+            {{publishStatus}}
+          </div>
+        </header>
+        <section class="article-body">{{{body}}}</section>
+        <a href="#" class="read-on">Read on &rarr;</a>
+      </article>
+    </script>
+    </head>
+  <body>
+    <header class="site-header clearfix">
+      <section class="heading-group-h1 pull-left">
+        <h1>
+          Kilovolt Blog!
+        </h1>
+        <h2>The shocking power of static pages</h2>
+      </section>
+      <nav class="main-nav">
+        <div class="icon-menu"></div>
+        <ul>
+          <!-- NOTE (stretch goal): In the same way that we enabled tab navigation on index.html, we can do the same on this page utilizing these elements. -->
+          <li class="tab" data-content="write"><a href="#" class="icon-home"> Write</a></li>
+          <li class="tab" data-content="articles"><a href="#" class="icon-home"> Preview</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="clearfix">
+
+      <section id="write" class="tab-content">
+        <h1>Create New Article</h1>
+        <form id="new-article">
+          <input id="title" placeholder= "Title of Your Article">
+          <input id="author" placeholder= "Author Name">
+          <input id="authorUrl" placeholder= "Author URL">
+          <input id="category" placeholder= "Category Name">
+          <textarea id="body" cols="30" rows="3"></textarea>
+          <label for="publishedOn">
+              <input id="publishedOn" type="checkbox">
+              <span>Published?</span>
+          </label>
+        </form>
+      </section>
+
+      <section id="articles" class="tab-content">
+        <!-- NOTE: This is where we will display our article preview -->
+      </section>
+
+      <section id="article-export">
+        <input id="article-json" value="{json would be here}" readonly> 
+        <lable>When finalized, copy the above JSON and paste into blogArticles.js</lable>
+      </section>
+
+    </main>
+    <footer>
+      &copy; 2018 Code Fellows | Static Blog | Happy Ipsum!
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    <!-- NOTE (stretch goal): Include script tags for 3rd party libraries to enable Markdown rendering and code syntax highlighting. Use the minified CDN. Keep in mind that if we want these features to render properly on our main blog page (index.html) that we'll need to add those scripts over there, too. -->
+    <script src="scripts/blogArticles.js"></script>
+    <script src="scripts/article.js"></script>
+    <script src="scripts/articleView.js"></script>
+    <script>
+       articleView.initNewArticlePage();
+      
+      // COMMENT: What is this function doing? Why do we need it?
+      // This function shows the tab content, allows you to select the json content on focus, and puts event listeners on change on the form. It also calls the function that appends what is typed to the page. It is needed because it needs to be accesed by other pages.
+    </script>
+  </body>
+</html>
