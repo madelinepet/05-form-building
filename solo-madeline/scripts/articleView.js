@@ -100,13 +100,12 @@ articleView.create = () => {
   }
   //only says draft when there is no date. Make it so there is only a date if published.
   if ($('#publishedOn').is(':checked')){
-    console.log('checked!');
-    let daysAgo = parseInt(new Date()/60/60/24/1000);
     let dateObj = {
-      publishedOn: daysAgo,
+      publishedOn: new Date(),
+      //daysAgo comes from article.js. It is underlined here because the linter does not realize that, but it is working in the JSON this produces.
       publishStatus: Article.publishedOn ? `published ${daysAgo} days ago` : '(draft)',
     }
-    //if this condition is met, merge these two objects into one so that date displays when published. Draft displays when unpublished.
+    //if this condition is met, merge these two objects into one so that date displays when published. '(draft)' displays when unpublished.
     Object.assign(articleObj, dateObj);
   }
   let article = new Article(articleObj);
