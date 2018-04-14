@@ -75,13 +75,10 @@ articleView.setTeasers = () => {
 };
 
 // COMMENT: Where is this function called? Why?
-// PUT YOUR RESPONSE HERE
-articleView.initNewArticlePage = () => {
-  //Ensure the main .tab-content area is revealed. We might add more tabs later or otherwise edit the tab navigation.
-  $('.tab-content').show;
+//This function is called last because it depends on the other functions executing first.
 
-  // TODO: The new articles we create will be copy/pasted into our source data file.
-  // Set up this "export" functionality. We can hide it for now, and show it once we have data to export.
+articleView.initNewArticlePage = () => {
+  $('.tab-content').show;
 
   $('#article-json').on('focus', function(){
     $(this).select();
@@ -89,39 +86,39 @@ articleView.initNewArticlePage = () => {
     document.execCommand('copy');
   });
 
-  // TODO: Add an event handler to update the preview and the export field if any inputs change.
   $('#new-article').on('change', 'input, textarea', articleView.create);
 };
 
 articleView.create = () => {
-  // TODO: Set up a variable to hold the new article we are creating.
-  // Clear out the #articles element, so we can put in the updated preview
-  console.log('hi!');
   $('#articles > *').remove();
-  // TODO: Instantiate an article based on what's in the form fields:
   let articleObj = {
     title: $('#title').val(),
     category: $('#category').val(),
     author: $('#author').val(),
     authorUrl: $('#authorUrl').val(),
-    publishedOn: $('#publishedOn').val(),
     body: $('#body').val()
   }
-
+  //only says draft when there is no date. Make it so there is only a date if published.
+  if ($('#publishedOn').is(':checked')){
+    console.log('checked!');
+    let daysAgo = parseInt(new Date()/60/60/24/1000);
+    let dateObj = {
+      publishedOn: daysAgo,
+      publishStatus: Article.publishedOn ? `published ${daysAgo} days ago` : '(draft)',
+    }
+    //if this condition is met, merge these two objects into one so that date displays when published. Draft displays when unpublished.
+    Object.assign(articleObj, dateObj);
+  }
   let article = new Article(articleObj);
 
-  // TODO: Use our interface to the Handblebars template to put this new article into the DOM:
   $('#articles').append(article.toHtml());
-
-  // TODO: Activate the highlighting of any code blocks; look at the documentation for hljs to see how to do this by placing a callback function in the .each():
   $('pre code').each();
 
-  // TODO: Show our export field, and export the new article as JSON, so it's ready to copy/paste into blogArticles.js:
-
+  $('#article-json').val(JSON.stringify(article));
 };
 
 // COMMENT: Where is this function called? Why?
-// PUT YOUR RESPONSE HERE
+//This function is called as a callback in the event listener above the function. It is called there because it should only run on the occurance of the change event to the form fields.
 articleView.initIndexPage = () => {
   articles.forEach(article => $('#articles').append(article.toHtml()));
   articleView.populateFilters();

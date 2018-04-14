@@ -14,6 +14,7 @@ VS Code, HTML5, CSS3, JS, jQuery, live-server.
 
 ## Change Log
 04-13-2018 3:49pm - Application now has scaffolding.
+5:07pm - Application has event listeners and appends input to page. JSON 
 
 ## Credits and Collaborations
 John and the entire class for building the majority of this during lecture.

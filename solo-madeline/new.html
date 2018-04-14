@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="styles/modules.css">
     <!-- NOTE (stretch goal): To fully incorporate the highlighting library "hljs" we need to fill the empty link tag below to refer to a CSS file that will handle our text highlighting -->
     <link>
-    <!-- DONE: We want our new article form to be able to display a preview of the article that is being entered. Thus, we need code here that will recreate the same structure of our other articles. What do you think we need to add here? -->
     <script id="article-template" type="text/x-handlebars-template">
       <article class="clearfix" data-author="{{author}}" data-category="{{category}}">
         <header>
@@ -47,13 +46,6 @@
 
       <section id="write" class="tab-content">
         <h1>Create New Article</h1>
-        <!-- TODO: Set up a form to accept user input for a new blog article. Remember that we need:
-           1. Article title
-           2. Article body
-           3. Article author
-           4. Author's URL
-           5. Article category
-           6. Some way to know if this article is a draft or is published -->
         <form id="new-article">
           <input id="title" placeholder= "Title of Your Article">
           <input id="author" placeholder= "Author Name">
@@ -72,7 +64,6 @@
       </section>
 
       <section id="article-export">
-        <!-- TODO: Refer to the preview image to see what we will be building here: we need a container of some kind to hold a JSON export of our article. Ideally this container would show only a incipit (short preview) of the JSON and also be clickable to allow easy selection of the text it holds. What kind of element could we use for this? -->
         <input id="article-json" value="{json would be here}" readonly> 
         <lable>When finalized, copy the above JSON and paste into blogArticles.js</lable>
       </section>
@@ -89,14 +80,10 @@
     <script src="scripts/article.js"></script>
     <script src="scripts/articleView.js"></script>
     <script>
-      // TODO: We will need to call a function here to initialize the behaviors on this page, once we get them built out. Why?
-
-      // (Look at the bottom of index.html as a reference. Since we are now using our JS on two different HTML pages that have different needs as to what parts of the code they utilize, we need to build a function that inializes each page.)
-      //  Hint: Look in articleView.js for a function that does this.
-      articleView.initNewArticlePage();
+       articleView.initNewArticlePage();
       
       // COMMENT: What is this function doing? Why do we need it?
-      // PUT YOUR RESPONSE HERE
+      // This function shows the tab content, allows you to select the json content on focus, and puts event listeners on change on the form. It also calls the function that appends what is typed to the page. It is needed because it needs to be accesed by other pages.
     </script>
   </body>
 </html>
